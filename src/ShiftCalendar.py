@@ -67,6 +67,6 @@ class ShiftCalendar(Calendar):
                 if start_day <= request.start_time.date() and request.end_time.date() <= end_day:
                     requests_in_shift.append(request)
             if len(requests_in_shift) != 0:
-                shifts.append((shift, requests_in_shift))
+                shifts.append((shift, requests_in_shift, start_day))
 
         return shifts
