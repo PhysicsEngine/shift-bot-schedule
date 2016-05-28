@@ -33,7 +33,7 @@ class ShiftSolver:
         '''
         @params shift: which includes (days, requests) in tuple format
         '''
-        (days, requests) = shift
+        (days, requests, start_day) = shift
         start_in_shift = days[0]
         assert len(days) == self.days_in_shift
         for r in requests:
