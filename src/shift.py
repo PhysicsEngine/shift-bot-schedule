@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from urlparse import urlparse
+import urlparse
 from datetime import datetime
 import json
 import psycopg2
@@ -11,7 +11,8 @@ from ShiftCalendar import ShiftCalendar
 from ShiftSolver import ShiftSolver
 
 DATABASE_URL = os.environ['DATABASE_URL']
-pg_credential = urlparse(DATABASE_URL)
+urlparse.uses_netloc.append("postgres")
+pg_credential = urlparse.urlparse(DATABASE_URL)
 
 def shift_job():
     print("Creating shift tables... {}".format(datetime.now().strftime("%Y/%m/%d %H:%M:%S")))
@@ -45,6 +46,7 @@ def create_shift_table_by_team(team=1):
         })
         ret = cursor.execute("INSERT INTO shifts (team, start_date, time_table) VALUES(%s, %s, %s)", (team, start_date, json_time_table))
 
+    conn.commit()
     cursor.close()
     conn.close()
 
